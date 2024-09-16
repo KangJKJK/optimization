@@ -10,19 +10,19 @@ CYAN=$(tput setaf 6)
 MAGENTA=$(tput setaf 5)
 
 # 색깔을 적용하는 함수들
-function print_info() {
+print_info() {
     echo -e "${BOLD}${CYAN}$1${RESET}"
 }
 
-function print_success() {
+print_success() {
     echo -e "${BOLD}${GREEN}$1${RESET}"
 }
 
-function print_warning() {
+print_warning() {
     echo -e "${BOLD}${YELLOW}$1${RESET}"
 }
 
-function print_error() {
+print_error() {
     echo -e "${BOLD}${RED}$1${RESET}"
 }
 
@@ -75,6 +75,5 @@ sudo fstrim -av
 
 # 최적화 완료 메시지 출력
 print_success "스토리지 최적화가 완료되었습니다!"
-
-echo -e "${YELLOW}모든작업이 완료되었습니다.${NC}"
-echo -e "${GREEN}스크립트 작성자: https://t.me/kjkresearch${NC}"
+print_success "모든 작업이 완료되었습니다."
+print_success "스크립트 작성자: https://t.me/kjkresearch"
