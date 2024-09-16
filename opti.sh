@@ -1,21 +1,18 @@
 #!/bin/bash
 
 # 색깔 변수 정의
-BOLD=$(tput bold)
-RESET=$(tput sgr0)
-GREEN=$(tput setaf 2)
-YELLOW=$(tput setaf 3)
-RED=$(tput setaf 1)
-CYAN=$(tput setaf 6)
-MAGENTA=$(tput setaf 5)
+RESET='\033[0m'
+BOLD='\033[1m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+RED='\033[0;31m'
+CYAN='\033[0;36m'
+MAGENTA='\033[0;35m'
+BLUE='\033[0;34m'
 
-# 색깔을 적용하는 함수들
+# 함수 정의
 print_info() {
     echo -e "${BOLD}${CYAN}$1${RESET}"
-}
-
-print_success() {
-    echo -e "${BOLD}${GREEN}$1${RESET}"
 }
 
 print_warning() {
@@ -26,7 +23,7 @@ print_error() {
     echo -e "${BOLD}${RED}$1${RESET}"
 }
 
-print_success "시스템 최적화 작업을 시작합니다."
+echo -e "${GREEN}시스템 최적화 작업을 시작합니다.${RESET}"
 
 # 시스템 청소 및 불필요한 패키지 제거
 print_info "불필요한 패키지 및 캐시 제거 중..."
@@ -70,10 +67,11 @@ print_info "사용되지 않는 스냅샷 제거 중..."
 sudo lvremove --force $(lvs --noheadings -o lv_path | grep '_snapshot')
 
 # 모든 파티션에서 디스크 사용량 최적화
-print_info "디스크 사용량 최적화 중..."
+print_info "모든 파티션에서 디스크 사용량 최적화 중..."
 sudo fstrim -av
 
 # 최적화 완료 메시지 출력
-print_success "스토리지 최적화가 완료되었습니다!"
-print_success "모든 작업이 완료되었습니다."
-print_success "스크립트 작성자: https://t.me/kjkresearch"
+print_warning "스토리지 최적화가 완료되었습니다!"
+
+print_info "모든 작업이 완료되었습니다."
+echo -e "${GREEN}스크립트 작성자: https://t.me/kjkresearch${RESET}"
